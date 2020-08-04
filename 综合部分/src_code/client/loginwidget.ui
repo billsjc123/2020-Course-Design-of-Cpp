@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>loginWidget</class>
+ <widget class="QWidget" name="loginWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>423</width>
+    <height>334</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>宠物小精灵对战系统登录界面</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>391</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelPassword">
+        <property name="text">
+         <string>用户名：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditUsername">
+        <property name="text">
+         <string>billsjc123</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="labelUsername">
+        <property name="text">
+         <string>密   码：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEditPassword">
+        <property name="text">
+         <string>123456</string>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="buttonLogin">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#buttonLogin
+{
+background-color:rgb(134,183,200);
+border:2px solid #5F92B2;
+border-radius:5px;
+color:white
+}
+QPushButton#buttonLogin:hover
+{
+background-color:rgb(0,130,150);
+border:2px solid #5F92B2;
+border-radius:5px;
+color:white;
+}
+QPushButton#buttonLogin:hover:pressed
+{
+background-color:rgb(85,170,255); 
+border:2px solid #3C80B1;
+border-radius:5px;
+color:white;
+}</string>
+        </property>
+        <property name="text">
+         <string>登录</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="buttonBack">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#buttonBack
+{
+background-color:rgb(134,183,200);
+border:2px solid #5F92B2;
+border-radius:5px;
+color:white
+}
+QPushButton#buttonBack:hover
+{
+background-color:rgb(0,130,150);
+border:2px solid #5F92B2;
+border-radius:5px;
+color:white;
+}
+QPushButton#buttonBack:hover:pressed
+{
+background-color:rgb(85,170,255); 
+border:2px solid #3C80B1;
+border-radius:5px;
+color:white;
+}</string>
+        </property>
+        <property name="text">
+         <string>返回</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

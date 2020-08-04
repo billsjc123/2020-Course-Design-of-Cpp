@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/Onix.png</file>
+        <file>images/Pidgey.png</file>
+        <file>images/Primeape.png</file>
+        <file>images/Snorlax.png</file>
+        <file>images/badge1_choppery.png</file>
+        <file>images/badge1_gold.png</file>
+        <file>images/badge2_choppery.png</file>
+        <file>images/badge2_gold.png</file>
+        <file>images/badge1_no.png</file>
+        <file>images/badge1_sliver.png</file>
+        <file>images/badge2_no.png</file>
+        <file>images/badge2_sliver.png</file>
+        <file>images/login_bg.jpg</file>
+        <file>images/pokemonball.ico</file>
+    </qresource>
+    <qresource prefix="/music">
+        <file>images/Chiru.mp3</file>
+    </qresource>
+    <qresource prefix="/qss">
+        <file>qss/psblack.css</file>
+    </qresource>
+</RCC>
