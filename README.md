@@ -364,7 +364,7 @@ void Pokemon::attack(Pokemon& opponent,string &sendbuf, int autofight)
 
 命中判定：
 
-![image-20200831211845615](images\1.png)
+![image-20200831211845615](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/1.png)
 
 简化后的本系统的伤害函数和闪避函数，经过测试后实际效果良好。
 
@@ -490,11 +490,11 @@ Pokemon(
 
 **Login**
 
-![image-20200831211958597](images\sql1.png)
+![image-20200831211958597](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/sql1.png)
 
 **Pokemon**
 
-![image-20200831212005748](images\sql2.png)
+![image-20200831212005748](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/sql2.png)
 
 # 详细设计
 
@@ -610,7 +610,7 @@ Client端所有ui的设计均在QT Creator内完成，基本的信号与槽不�
 
 本窗口为客户端的主窗口，除了登录、注册，其它一切操作均在此窗口完成。
 
-![image-20200831212055224](images\UI1.png)
+![image-20200831212055224](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI1.png)
 
 窗口初始化时，socket不与服务端连接。当执行完登录操作后，server端向client端发送分配的Endpoint的端口号，端口号通过登录窗口的信号发送给主窗口，主窗口得到端口号后与Endpoint进行连接，连接成功后进入功能界面。信号中还传递了用户的id。
 
@@ -695,21 +695,21 @@ void PokemonWidget::dealServerMsg()
 
 **菜单界面**
 
-![image-20200831212119969](images\UI2.png)
+![image-20200831212119969](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI2.png)
 
 **用户列表**
 
-![image-20200831212135373](images\UI3.png)
+![image-20200831212135373](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI3.png)
 
 **小精灵列表**
 
-![image-20200831212213856](images\UI4.png)
+![image-20200831212213856](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI4.png)
 
 **小精灵详细信息**和**修改名字**
 
 注：修改名字的逻辑是将名字栏设为可修改，用户点击修改名字后就会读取名字栏的内容并发送给服务器。即，即使不修改内容也可以执行修改名字的操作。
 
-![image-20200831212208547](images\UI5.png)
+![image-20200831212208547](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI5.png)
 
 ### LoginWidget类 & RegisterWidget类
 
@@ -746,17 +746,17 @@ strFunction类包含了一些基础的字符串检查函数，包括检查用户
 
 **登录界面**
 
-![image-20200831212246886](images\UI6.png)
+![image-20200831212246886](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI6.png)
 
-![image-20200831212316661](images\UI7.png)
+![image-20200831212316661](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI7.png)
 
 **注册界面**
 
-![image-20200831213407108](images\UI8.png)
+![image-20200831213407108](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI8.png)
 
-![image-20200831213427055](images\UI9.png)
+![image-20200831213427055](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI9.png)
 
-![image-20200831213452421](images\UI10.png)
+![image-20200831213452421](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI10.png)
 
 ## 通信格式
 
@@ -805,15 +805,15 @@ int main()
 
 **启动服务器**
 
-![image-20200831213505165](images\server1.png)
+![image-20200831213505165](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/server1.png)
 
 **登录成功**
 
-![image-20200831213509670](images\server2.png)
+![image-20200831213509670](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/server2.png)
 
 **其它指令**
 
-![image-20200831213514845](images\server3.png)
+![image-20200831213514845](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/server3.png)
 
 # 阶段三 联网对战
 
@@ -858,26 +858,27 @@ FightController用于判断是否初始化战斗界面（第一次战斗前以�
 
 **选择自己的精灵出战，会显示”就决定是你了“**
 
-![image-20200831213549237](images\UI11.png)
+![image-20200831213549237](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI11.png)
 
 **选择成功会有弹窗提示**
 
-![image-20200831213559406](images\UI12.png)**选择对手小精灵出战，会显示“和我决斗吧”**
+![image-20200831213559406](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI12.png)
+**选择对手小精灵出战，会显示“和我决斗吧”**
 
-![image-20200831213618880](images\UI14.png)
+![image-20200831213618880](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI14.png)
 
 
 
 - 升级模式的对手可以选择任意小精灵（玩家小精灵+系统小精灵），决斗模式的对手只能是系统小精灵。决斗失败后，自己的某一只小精灵会变为系统小精灵
 - 对战界面：左右各为小精灵信息的展板，中间的TextBrowser是战斗信息的输出模块。
 
-![image-20200831220628905](C:\Users\10343\AppData\Roaming\Typora\typora-user-images\image-20200831220628905.png)
+![image-20200831220628905](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI15.png)
 
 - 若是决斗模式失败，则状态变为`LOSEPOKEMON`，若小精灵只剩一只，会在给出小精灵后随机为玩家分配一名1级小精灵。
 
-![image-20200831220803014](images\UI16.png)
+![image-20200831220803014](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI16.png)
 
-![image-20200831220820663](images\UI17.png)
+![image-20200831220820663](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI17.png)
 
 ### 服务器部分
 
@@ -952,7 +953,7 @@ BattleController、attack函数都进行了修改，都在参数中添加了一�
 
 展示界面：
 
-![image-20200901100520667](images\UI18.png)
+![image-20200901100520667](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI18.png)
 
 ## 胜率系统
 
@@ -968,7 +969,7 @@ BattleController、attack函数都进行了修改，都在参数中添加了一�
 
 用户查询精灵列表时，再次从数据库请求胜场和总场次，并计算胜率。展示情况与徽章相同，共用showbadge进行判定是否展示。
 
-![image-20200831220848691](images\UI19.png)
+![image-20200831220848691](https://github.com/billsjc123/Course-Design-of-Cpp/blob/master/images/UI19.png)
 
 # 遇见的问题
 
