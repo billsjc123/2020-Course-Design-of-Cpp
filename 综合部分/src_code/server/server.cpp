@@ -88,10 +88,10 @@ void Hub::run()
 
 	running = true;
 	thread listenThread(&Hub::ListenFunc, this);
-	//thread terminateThread(&Hub::TerminateFunc, this);
+	thread terminateThread(&Hub::TerminateFunc, this);
 	// 执行完这两个线程再执行后续过程
 	listenThread.join();
-	//terminateThread.join();
+	terminateThread.join();
 
 	// Hub结束
 	WSACleanup();
@@ -156,12 +156,12 @@ void Hub::ListenFunc()
 	}
 }
 
-//void Hub::TerminateFunc()
-//{
-//	_getch();
-//	running = false;
-//	closesocket(hubSocket);
-//}
+void Hub::TerminateFunc()
+{
+	_getch();
+	running = false;
+	closesocket(hubSocket);
+}
 
 void Hub::dealClientInfo(const string &recv)
 {
@@ -236,7 +236,7 @@ void Hub::dealClientInfo(const string &recv)
 					}
 
 					// 为用户分配Endpoint
-					auto endpoint=new Endpoint	(id,db,*this);
+					auto endpoint=new Endpoint(id,db,*this);
 					int endpointPort = endpoint->start();
 					if (endpointPort == 0)
 					{
@@ -287,7 +287,6 @@ void Hub::dealClientInfo(const string &recv)
 					string sendbuf = to_string(endpointPort) + " " + to_string(id) + " " + to_string(endpoint->getWinRound()) + " " + to_string(endpoint->getTotalRound());
 					strcpy(buf, sendbuf.c_str());
 					cout << username << "登录成功，端口号为:" << sendbuf << endl;
-
 				}
 			}
 
@@ -333,7 +332,6 @@ void Hub::dealClientInfo(const string &recv)
 			}
 
 			// 随机给三个小精灵
-			srand((unsigned)time(NULL));
 			for (int i = 0; i < 3; i++)
 			{
 				// 获得该用户id

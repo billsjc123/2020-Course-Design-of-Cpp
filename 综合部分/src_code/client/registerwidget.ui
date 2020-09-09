@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>625</width>
+    <height>414</height>
    </rect>
   </property>
   <property name="font">
@@ -21,10 +21,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>361</width>
-     <height>241</height>
+     <x>30</x>
+     <y>20</y>
+     <width>552</width>
+     <height>381</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -34,22 +34,58 @@
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QLabel" name="labelUsername">
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;
+</string>
+          </property>
           <property name="text">
-           <string>用    户   名：</string>
+           <string>USERNAME:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="labelPassword">
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;
+</string>
+          </property>
           <property name="text">
-           <string>密         码：</string>
+           <string>PASSWORD:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="labelPassword_2">
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;
+</string>
+          </property>
           <property name="text">
-           <string>请再次输入密码：</string>
+           <string>PASSWORD AGAIN:</string>
           </property>
          </widget>
         </item>
@@ -57,8 +93,29 @@
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>15</number>
+        </property>
         <item>
          <widget class="QLineEdit" name="lineEditUsename">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;
+background-color:#666666</string>
+          </property>
           <property name="text">
            <string>billsjc123</string>
           </property>
@@ -72,6 +129,22 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditPassword">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;
+background-color:#666666</string>
+          </property>
           <property name="text">
            <string>1</string>
           </property>
@@ -85,6 +158,16 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditPassword_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;
+background-color:#666666</string>
+          </property>
           <property name="text">
            <string>1</string>
           </property>
@@ -106,22 +189,28 @@
        <widget class="QPushButton" name="pushButtonReg">
         <property name="minimumSize">
          <size>
-          <width>100</width>
-          <height>30</height>
+          <width>200</width>
+          <height>60</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton#pushButtonReg
 {
-background-color:rgb(134,183,200);
-border:2px solid #5F92B2;
+
 border-radius:5px;
 color:white
 }
 QPushButton#pushButtonReg:hover
 {
-background-color:rgb(0,130,150);
-border:2px solid #5F92B2;
+background-color:#666666;
 border-radius:5px;
 color:white;
 }
@@ -134,7 +223,7 @@ color:white;
 }</string>
         </property>
         <property name="text">
-         <string>注册</string>
+         <string>OK</string>
         </property>
        </widget>
       </item>
@@ -155,22 +244,28 @@ color:white;
        <widget class="QPushButton" name="pushButtonBack">
         <property name="minimumSize">
          <size>
-          <width>100</width>
-          <height>30</height>
+          <width>200</width>
+          <height>60</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton#pushButtonBack
 {
-background-color:rgb(134,183,200);
-border:2px solid #5F92B2;
+
 border-radius:5px;
 color:white
 }
 QPushButton#pushButtonBack:hover
 {
-background-color:rgb(0,130,150);
-border:2px solid #5F92B2;
+background-color:#666666;
 border-radius:5px;
 color:white;
 }
@@ -183,7 +278,7 @@ color:white;
 }</string>
         </property>
         <property name="text">
-         <string>返回</string>
+         <string>BACK</string>
         </property>
        </widget>
       </item>
@@ -199,11 +294,18 @@ color:white;
       </property>
       <property name="font">
        <font>
-        <family>幼圆</family>
+        <family>Terminal</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color:white;
+</string>
+      </property>
       <property name="text">
-       <string>请输出用户名和密码！~~~///(^v^)\~~~</string>
+       <string>PLEASE ENTER PASSWORD AND USERNAME!~~~///(^v^)\~~~</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>

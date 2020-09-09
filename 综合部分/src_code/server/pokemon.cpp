@@ -136,13 +136,13 @@ template<>
 Race<0>::Race() :PokemonBase(Pow)
 {
 	changeRacename("Primeape");
-	_skillNames[0] = "SCRATCH";
+	_skillNames[0] = "ÄÓ";
 	_skillDesc[0] = "Normal attack with low damage";
-	_skillNames[1] = "KARATE-CHOP";
+	_skillNames[1] = "¿ÕÊÖµÀÇÐ";
 	_skillDesc[1] = "Normal attack with high damage";
-	_skillNames[2] = "SHOULDER-THROW";
+	_skillNames[2] = "¹ý¼çË¤";
 	_skillDesc[2] = "Cause damage and decrease enemy's dfs";
-	_skillNames[3] = "SEISIMIC-TOSS";
+	_skillNames[3] = "µØÇòÍ¶";
 	_skillDesc[3] = "Cause twice damage of its own atk";
 	_pp[0] = INT_MAX;
 	_pp[1] = 10;
@@ -257,13 +257,13 @@ template<>
 Race<1>::Race() :PokemonBase(Shi)
 {
 	changeRacename("Snorlax");
-	_skillNames[0] = "TACKLE";
+	_skillNames[0] = "Ë¤õÓ";
 	_skillDesc[0] = "Normal attack";
-	_skillNames[1] = "DEFENSE-CURL";
+	_skillNames[1] = "¶Ç×Ó´ó¹Ä";
 	_skillDesc[1] = "Increase dfs";
-	_skillNames[2] = "SLEEP";
+	_skillNames[2] = "Ë¯¾õ";
 	_skillDesc[2] = "IncreaseHP";
-	_skillNames[3] = "BODY-SLAM";
+	_skillNames[3] = "Ì©É½Ñ¹¶¥";
 	_skillDesc[3] = "Cause HUGE damage";
 	_pp[0] = INT_MAX;
 	_pp[1] = 5;
@@ -347,13 +347,13 @@ template<>
 Race<2>::Race() :PokemonBase(Def)
 {
 	changeRacename("Onix");
-	_skillNames[0] = "DASH";
+	_skillNames[0] = "³å×²";
 	_skillDesc[0] = "Common attack";
-	_skillNames[1] = "OSSIFY";
+	_skillNames[1] = "Ó²»¯";
 	_skillDesc[1] = "Increase defense";
-	_skillNames[2] = "ROCK-BLOCKADE";
+	_skillNames[2] = "ÑÒÊ¯·âËø";
 	_skillDesc[2] = "Cause damage£¬and slightly slow down your enemy";
-	_skillNames[3] = "SAND-STORM";
+	_skillNames[3] = "É³³¾±©";
 	_skillDesc[3] = "Cause damage and decrease enemy's atk,dfs and speed";
 	_pp[0] = INT_MAX;
 	_pp[1] = 5;
@@ -452,13 +452,13 @@ template<>
 Race<3>::Race() :PokemonBase(Spe)
 {
 	changeRacename("Pidgey");
-	_skillNames[0] = "DASH";
+	_skillNames[0] = "³å×²";
 	_skillDesc[0] = "Common attack";
-	_skillNames[1] = "QUICK-MOVE";
+	_skillNames[1] = "¿ìËÙÒÆ¶¯";
 	_skillDesc[1] = "Speed UP!";
-	_skillNames[2] = "AIR-SLASH";
+	_skillNames[2] = "¿ÕÆøÕ¶";
 	_skillDesc[2] = "Cause HUGE damage";
-	_skillNames[3] = "HURRICANE";
+	_skillNames[3] = "ì«·ç";
 	_skillDesc[3] = "Cause damage and slow down your enemy£¬speed up";
 	_pp[0] = INT_MAX;
 	_pp[1] = 5;

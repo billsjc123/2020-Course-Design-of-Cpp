@@ -145,6 +145,8 @@ private:
 	int _battlepp[4];
 };
 
+
+// 无类型模板参数 int N
 template<int N>
 class Race :public PokemonBase
 {

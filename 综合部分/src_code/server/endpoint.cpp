@@ -18,8 +18,7 @@ Endpoint::~Endpoint()
 
 int Endpoint::start()
 {
-	// ´ÓÊı¾İ¿â»ñÈ¡ÓÃ»§Ãû
-	srand((unsigned)time(NULL));
+	// ä»æ•°æ®åº“è·å–ç”¨æˆ·å
 	char **sqlResult;
 	int nRow, nColumn;
 	string sql = "SELECT username FROM Login WHERE id = "+to_string(_PlayerID)+" ;";
@@ -43,7 +42,7 @@ int Endpoint::start()
 	}
 
 #pragma region init sock
-	// ³õÊ¼»¯Wincock
+	// åˆå§‹åŒ–Wincock
 	WSADATA wsaData;
 	int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (iResult != 0)
@@ -54,15 +53,15 @@ int Endpoint::start()
 	endpointSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	/**
-	 * Ëæ»ú»ñÈ¡¶Ë¿ÚºÅµÄ·½·¨
-	 * ÔÚbindÖ®Ç°½«socketµØÖ·µÄsin_portÉèÖÃÎª0£¬´ú±íÈÃÏµÍ³·ÖÅä¶Ë¿Ú
-	 * µ«ÊÇconnectÖ®ºó²»ÄÜÖ±½ÓÓÃsin_portÀ´»ñÈ¡¶Ë¿ÚºÅ
-	 * ±ØĞëÍ¨¹ıgetsockname()»ñµÃµ±Ç°ÒÑ¾­±»ÏµÍ³bindÁËµÄ¶Ë¿ÚºÅµÄµØÖ·
+	 * éšæœºè·å–ç«¯å£å·çš„æ–¹æ³•
+	 * åœ¨bindä¹‹å‰å°†socketåœ°å€çš„sin_portè®¾ç½®ä¸º0ï¼Œä»£è¡¨è®©ç³»ç»Ÿåˆ†é…ç«¯å£
+	 * ä½†æ˜¯connectä¹‹åä¸èƒ½ç›´æ¥ç”¨sin_portæ¥è·å–ç«¯å£å·
+	 * å¿…é¡»é€šè¿‡getsockname()è·å¾—å½“å‰å·²ç»è¢«ç³»ç»Ÿbindäº†çš„ç«¯å£å·çš„åœ°å€
 	*/
 
 	sockaddr_in endpointAddr;
 	endpointAddr.sin_family = PF_INET;
-	// ·ÖÅä¶Ë¿ÚµÄÈÎÎñ½»¸øOS
+	// åˆ†é…ç«¯å£çš„ä»»åŠ¡äº¤ç»™OS
 	endpointAddr.sin_port = htons(0);
 	endpointAddr.sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
 
@@ -77,7 +76,7 @@ int Endpoint::start()
 	}
 	cout << "Done...\n";
 	
-	// ÏÖÔÚÊ¹ÓÃgetsockname()À´µÃµ½¶Ë¿ÚºÅ
+	// ç°åœ¨ä½¿ç”¨getsockname()æ¥å¾—åˆ°ç«¯å£å·
 	int namelen = sizeof(endpointAddr);
 	getsockname(endpointSocket, (sockaddr*)&endpointAddr, &namelen);
 	_port = ntohs(endpointAddr.sin_port);
@@ -97,25 +96,27 @@ int Endpoint::start()
 
 #pragma endregion
 
-	// Ã¿´Î¿ªÆôÒ»¸öEndpoint²úÉúÒ»¸öĞÂµÄPokemon
-	// ÊıÁ¿¿ØÖÆÔÚ20¸öÒÔÄÚ
-	// ²éÑ¯ÓĞ¶àÉÙ¸öÏµÍ³¾«Áé
-	sql = "SELECT id FROM Pokemon WHERE id = 0";
+	// æ¯æ¬¡å¼€å¯ä¸€ä¸ªEndpointäº§ç”Ÿä¸€ä¸ªæ–°çš„Pokemon
+	// æ•°é‡æ§åˆ¶åœ¨20ä¸ªä»¥å†…
+	// æŸ¥è¯¢æœ‰å¤šå°‘ä¸ªç³»ç»Ÿç²¾çµ
+	sql = "SELECT id FROM Pokemon WHERE userid = 0";
 	if (sqlite3_get_table(db, sql.c_str(), &sqlResult,&nRow,&nColumn, &errMsg) != SQLITE_OK)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		//buf2 = "²úÉúÏµÍ³¾«ÁéÊ±·şÎñÆ÷Êı¾İ¿â´íÎó";
+		//buf2 = "äº§ç”Ÿç³»ç»Ÿç²¾çµæ—¶æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 	}
 	if (nRow < 20)
 		generate_new_pokemon = true;
+	else
+		generate_new_pokemon = false;
 	if (generate_new_pokemon)
 	{
-		// »ñµÃ¸ÃÓÃ»§id
+		// è·å¾—è¯¥ç”¨æˆ·id
 		int id = _PlayerID;
 		int rand_race = rand() % RACE_NUM;
 		Pokemon p(rand_race, "");
-		// Ëæ»ú¸øÒ»¸öep
+		// éšæœºç»™ä¸€ä¸ªep
 		int rand_ep = rand() % 1501;
 		p.gainEp(rand_ep);
 		sql = "INSERT INTO Pokemon (userid,name,race,atk,dfs,hp,speed,lv,ep)";
@@ -129,16 +130,16 @@ int Endpoint::start()
 		{
 			cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 			sqlite3_free(errMsg);
-			//buf2 =  "²úÉúÏµÍ³¾«ÁéÊ±·şÎñÆ÷Êı¾İ¿â´íÎó";
+			//buf2 =  "äº§ç”Ÿç³»ç»Ÿç²¾çµæ—¶æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		}
 		else
 		{
-			cout << "Endpoint[" << _PlayerID << "]: ÒÑ²úÉúĞÂµÄÏµÍ³¾«Áé"<< endl;
+			cout << "Endpoint[" << _PlayerID << "]:Initalization done."<< endl;
 		}
 	}
-
+		
 	running = true;
-	// ·µ»Ø¶Ë¿ÚºÅ
+	// è¿”å›ç«¯å£å·
 	return _port;
 }
 
@@ -147,9 +148,9 @@ void Endpoint::process()
 	while (running)
 	{
 		/*
-		* µ±ÓÃÀàµÄ³ÉÔ±º¯Êı×÷ÎªthreadµÄµÚÒ»¸ö²ÎÊıÊ±£¬µÚ¶ş¸ö²ÎÊıĞèÒª´«Ò»¸öÀàµÄ¶ÔÏó£¡
-		* ²»È»»á³öÏÖÄªÃûÆäÃîµÄ´íÎó£º¡°std::invoke¡±: Î´ÕÒµ½Æ¥ÅäµÄÖØÔØº¯Êı
-		* ³£¼ûµÄÊÇ´«±¾Éí£¬±ÈÈçthis£¡£¡
+		* å½“ç”¨ç±»çš„æˆå‘˜å‡½æ•°ä½œä¸ºthreadçš„ç¬¬ä¸€ä¸ªå‚æ•°æ—¶ï¼Œç¬¬äºŒä¸ªå‚æ•°éœ€è¦ä¼ ä¸€ä¸ªç±»çš„å¯¹è±¡ï¼
+		* ä¸ç„¶ä¼šå‡ºç°è«åå…¶å¦™çš„é”™è¯¯ï¼šâ€œstd::invokeâ€: æœªæ‰¾åˆ°åŒ¹é…çš„é‡è½½å‡½æ•°
+		* å¸¸è§çš„æ˜¯ä¼ æœ¬èº«ï¼Œæ¯”å¦‚thisï¼ï¼
 		*/
 		thread listenThread(&Endpoint::listenFunc,this);
 		listenThread.join();
@@ -168,13 +169,13 @@ void Endpoint::listenFunc()
 		{
 			if (running)
 			{
-				// Èç¹û»¹ÔÚrunning£¬ËµÃ÷²¢·ÇhubÖ÷¶¯¶Ï¿ªÁ¬½Ó
-				cout << "ÓëClientÁ¬½ÓÊ§°Ü£¡\n";
+				// å¦‚æœè¿˜åœ¨runningï¼Œè¯´æ˜å¹¶éhubä¸»åŠ¨æ–­å¼€è¿æ¥
+				cout << "connect failed with client!\n";
 			}
 			closesocket(clientSocket);
 			break;
 		}
-		cout << "Endpoint[" << _PlayerID << "]³É¹¦Óë" << inet_ntoa(clientAddr.sin_addr) << "µÄÓÃ»§Á¬½Ó" << endl;
+		cout << "Endpoint[" << _PlayerID << "]:connect to" << inet_ntoa(clientAddr.sin_addr) << "'s user successfully" << endl;
 		
 		while (running)
 		{
@@ -183,14 +184,14 @@ void Endpoint::listenFunc()
 			iResult = recv(clientSocket, recvbuf, DEFAULT_BUFLEN, 0);
 			if (iResult > 0)
 			{
-				// ³É¹¦½ÓÊÕ
+				// æˆåŠŸæ¥æ”¶
 				//recvbuf[iResult] = 0;
 				cout <<"Endpoint[" << _PlayerID << "] received request:" << recvbuf << endl;
 				dealClientInfo(recvbuf);
 			}
 			else if (iResult == 0)
 			{
-				//Á¬½Ó¶Ï¿ª
+				//è¿æ¥æ–­å¼€
 				running = false;
 				_online = false;
 				cout << "Connection closing...\n";
@@ -209,7 +210,7 @@ void Endpoint::listenFunc()
 	}
 }
 
-/* Ö¸ÁîÄ£°å
+/* æŒ‡ä»¤æ¨¡æ¿
  * <changePokemonName> <PlayerID> <pokemonid> <newname>
  * <getPokemonList> <userid>
  * <getUserList>
@@ -269,7 +270,7 @@ void Endpoint::dealClientInfo(const char* recvbuf)
 		cout << resStr << endl;
 		buf2 = resStr;
 	}
-	// ±ÜÃâÖØ¸´·¢ËÍ
+	// é¿å…é‡å¤å‘é€
 	if(buf2!="")
 		send(clientSocket, buf2.c_str(), buf2.size(), 0);
 	buf2 = "";
@@ -278,19 +279,18 @@ void Endpoint::dealClientInfo(const char* recvbuf)
 
 void Endpoint::logOut()
 {
-	//Á¬½Ó¶Ï¿ª
+	//è¿æ¥æ–­å¼€
 	running = false;
 	_online = false;
 
-	//ĞŞ¸ÄÊı¾İ¿âonline×Ö¶Î
+	//ä¿®æ”¹æ•°æ®åº“onlineå­—æ®µ
 	char *errMsg;
 	string sql = "UPDATE Login SET online = 0 WHERE id = " + to_string(_PlayerID);
 	if (sqlite3_exec(db, sql.c_str(), sqlite3_nonusecallback, NULL, &errMsg) != SQLITE_OK)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << *errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-		strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 
@@ -304,8 +304,8 @@ void Endpoint::changePassword(int PlayerID, const string oldpassword, const stri
 {
 	cout << "changePassword" << endl;
 
-	//ÏÈ²éÑ¯¾ÉÃÜÂë£¬Èô²»ÕıÈ·Ôò·µ»Ø
-	string sql = "SELECT password FROM Login WHERE id=" 
+	//å…ˆæŸ¥è¯¢æ—§å¯†ç ï¼Œè‹¥ä¸æ­£ç¡®åˆ™è¿”å›
+	string sql = "SELECT password FROM Login WHERE id="
 		+ to_string(PlayerID);
 	char ** sqlResult;
 	int nRow, nColumn;
@@ -314,8 +314,7 @@ void Endpoint::changePassword(int PlayerID, const string oldpassword, const stri
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		//strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -323,8 +322,7 @@ void Endpoint::changePassword(int PlayerID, const string oldpassword, const stri
 		if (nRow == 0)
 		{
 			cout << "Endpoint[" << _PlayerID << "]: Invalid playerID" << errMsg << endl;
-			//strcpy(buf, "ÎŞĞ§µÄÍæ¼ÒID");
-			buf2 = "ÎŞĞ§µÄÍæ¼ÒID";
+			buf2 = "æ— æ•ˆçš„ç©å®¶ID";
 			return;
 		}
 		else
@@ -332,16 +330,15 @@ void Endpoint::changePassword(int PlayerID, const string oldpassword, const stri
 			string user_password = sqlResult[1];
 			if (user_password != oldpassword)
 			{
-				cout << "Endpoint[" << _PlayerID << "]: Ô­ÃÜÂë´íÎó"<< endl;
-				buf2 = "Ô­ÃÜÂë´íÎó";
-				//strcpy(buf, "Ô­ÃÜÂë´íÎó");
+				cout << "Endpoint[" << _PlayerID << "]ï¼šåŸå¯†ç é”™è¯¯" << endl;
+				buf2 = "Wrong original password";
 				return;
 			}
 			else
 			{
 				// free
 				sqlite3_free_table(sqlResult);
-				// Ö´ĞĞĞŞ¸ÄÃÜÂëµÄÊı¾İ¿â²Ù×÷
+				// æ‰§è¡Œä¿®æ”¹å¯†ç çš„æ•°æ®åº“æ“ä½œ
 				sql = "UPDATE login SET password = '"+newpassword+"' WHERE id= "
 					+ to_string(PlayerID);
 
@@ -349,15 +346,13 @@ void Endpoint::changePassword(int PlayerID, const string oldpassword, const stri
 				{
 					cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << *errMsg << endl;
 					sqlite3_free(errMsg);
-					buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-					//strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+					buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 					return;
 				}
 				else
 				{
 					cout << "Accept.\n";
 					buf2 = "Accept.\n";
-					strcpy(buf, "Accept.\n");
 					return;
 				}
 			}
@@ -375,7 +370,7 @@ void Endpoint::getPokemonList(int PlayerID)
 	int nRow, nColumn;
 	char *errMsg;
 
-	// »ñµÃÊ¤ÂÊ
+	// è·å¾—èƒœç‡
 	if (PlayerID != 8888 && PlayerID != 0)
 	{
 		sql = "SELECT win_round,total_round FROM Login WHERE id = " + to_string(PlayerID);
@@ -383,8 +378,7 @@ void Endpoint::getPokemonList(int PlayerID)
 		{
 			cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 			sqlite3_free(errMsg);
-			buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-			strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+			buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 			return;
 		}
 		else
@@ -392,8 +386,7 @@ void Endpoint::getPokemonList(int PlayerID)
 			if (nRow == 0)
 			{
 				cout << "Endpoint[" << _PlayerID << "]: invalid playerID:" << endl;
-				buf2 = "ÎŞĞ§µÄPlayerID";
-				strcpy(buf, "ÎŞĞ§µÄPlayerID");
+				buf2 = "æ— æ•ˆçš„PlayerID";
 				return;
 			}
 			else
@@ -407,9 +400,9 @@ void Endpoint::getPokemonList(int PlayerID)
 	else
 		buf2 = "\n";
 
-	// »ñµÃĞ¡¾«Áé
-	// playerid = 0¡ª¡ª¡ª¡ªÏµÍ³ÄÚ²¿Ğ¡¾«Áé
-	// playerid = 8888¡ª¡ª¡ª¡ª³ıÁË×Ô¼ºµÄËùÓĞĞ¡¾«Áé
+	// è·å¾—å°ç²¾çµ
+	// playerid = 0â€”â€”â€”â€”ç³»ç»Ÿå†…éƒ¨å°ç²¾çµ
+	// playerid = 8888â€”â€”â€”â€”é™¤äº†è‡ªå·±çš„æ‰€æœ‰å°ç²¾çµ
 	if(PlayerID!=8888)
 		sql = "SELECT id,userid,name,race,lv FROM Pokemon WHERE userid = " + to_string(PlayerID);
 	else
@@ -418,8 +411,7 @@ void Endpoint::getPokemonList(int PlayerID)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-		strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -427,8 +419,7 @@ void Endpoint::getPokemonList(int PlayerID)
 		if (nRow == 0)
 		{
 			cout << "Endpoint[" << _PlayerID << "]: invalid playerID:" << endl;
-			buf2 = "ÎŞĞ§µÄPlayerID";
-			strcpy(buf, "ÎŞĞ§µÄPlayerID");
+			buf2 = "æ— æ•ˆçš„PlayerID";
 			return;
 		}
 		else
@@ -464,14 +455,12 @@ void Endpoint::changePokemonName(int pokemonid, string newname)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << *errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-		strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
 	{
 		cout << "Accept.\n";
-		strcpy(buf, "Accept.\n");
 		buf2 = "Accept.\n";
 		return;
 	}
@@ -492,8 +481,7 @@ void Endpoint::getUserList()
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-		strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -510,7 +498,6 @@ void Endpoint::getUserList()
 		}
 		buf2 = result;
 		cout << buf2;
-		strcpy(buf, result.c_str());
 		sqlite3_free_table(sqlResult);
 	}
 }
@@ -530,8 +517,7 @@ void Endpoint::getPokemonInfo(int PokemonID)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-		strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -547,7 +533,6 @@ void Endpoint::getPokemonInfo(int PokemonID)
 		}
 		buf2 = result;
 		cout << buf2;
-		strcpy(buf, result.c_str());
 		sqlite3_free_table(sqlResult);
 	}
 }
@@ -555,24 +540,24 @@ void Endpoint::getPokemonInfo(int PokemonID)
 void Endpoint::savePokemonToDB(const Pokemon &pokemon)
 {
 	cout << "savePokemonToDB" << endl;
-	// ²éÓĞ´ËÈË
+	// æŸ¥æœ‰æ­¤äºº
 
 	/*
-	* SQLITEÖĞµÄREPLACE Óï¾ä
-	* replaceÓï¾ä»áÉ¾³ıÔ­ÓĞµÄÒ»Ìõ¼ÇÂ¼£¬ ²¢ÇÒ²åÈëÒ»ÌõĞÂµÄ¼ÇÂ¼À´Ìæ»»Ô­¼ÇÂ¼
-	* replaceÓï¾äÌæ»»Ò»Ìõ¼ÇÂ¼µÄËùÓĞÁĞ£¬ Èç¹ûÔÚreplaceÓï¾äÖĞÃ»ÓĞÖ¸¶¨Ä³ÁĞ£¬ ÔÚreplaceÖ®ºóÕâÁĞµÄÖµ±»ÖÃ¿Õ
-	* replace¸ù¾İÖ÷¼üÈ·¶¨±»Ìæ»»µÄÊÇÄÄÒ»Ìõ¼ÇÂ¼
-	* replaceÓï¾ä²»ÄÜ¸ù¾İwhere×Ó¾äÀ´¶¨Î»Òª±»Ìæ»»µÄ¼ÇÂ¼
-	* Èç¹ûÖ´ĞĞreplaceÓï¾äÊ±£¬ ²»´æÔÚÒªÌæ»»µÄ¼ÇÂ¼£¬ ÄÇÃ´¾Í»á²åÈëÒ»ÌõĞÂµÄ¼ÇÂ¼¡£
-	* Èç¹ûĞÂ²åÈëµÄ»òÌæ»»µÄ¼ÇÂ¼ÖĞ£¬ ÓĞ×Ö¶ÎºÍ±íÖĞµÄÆäËû¼ÇÂ¼³åÍ»£¬ ÄÇÃ´»áÉ¾³ıÄÇÌõÆäËû¼ÇÂ¼¡£
+	* SQLITEä¸­çš„REPLACE è¯­å¥
+	* replaceè¯­å¥ä¼šåˆ é™¤åŸæœ‰çš„ä¸€æ¡è®°å½•ï¼Œ å¹¶ä¸”æ’å…¥ä¸€æ¡æ–°çš„è®°å½•æ¥æ›¿æ¢åŸè®°å½•
+	* replaceè¯­å¥æ›¿æ¢ä¸€æ¡è®°å½•çš„æ‰€æœ‰åˆ—ï¼Œ å¦‚æœåœ¨replaceè¯­å¥ä¸­æ²¡æœ‰æŒ‡å®šæŸåˆ—ï¼Œ åœ¨replaceä¹‹åè¿™åˆ—çš„å€¼è¢«ç½®ç©º
+	* replaceæ ¹æ®ä¸»é”®ç¡®å®šè¢«æ›¿æ¢çš„æ˜¯å“ªä¸€æ¡è®°å½•
+	* replaceè¯­å¥ä¸èƒ½æ ¹æ®whereå­å¥æ¥å®šä½è¦è¢«æ›¿æ¢çš„è®°å½•
+	* å¦‚æœæ‰§è¡Œreplaceè¯­å¥æ—¶ï¼Œ ä¸å­˜åœ¨è¦æ›¿æ¢çš„è®°å½•ï¼Œ é‚£ä¹ˆå°±ä¼šæ’å…¥ä¸€æ¡æ–°çš„è®°å½•ã€‚
+	* å¦‚æœæ–°æ’å…¥çš„æˆ–æ›¿æ¢çš„è®°å½•ä¸­ï¼Œ æœ‰å­—æ®µå’Œè¡¨ä¸­çš„å…¶ä»–è®°å½•å†²çªï¼Œ é‚£ä¹ˆä¼šåˆ é™¤é‚£æ¡å…¶ä»–è®°å½•ã€‚
 	*/
 
 	/*
-	* SQLITEÖĞµÄUPDATEÓï¾ä£¨Ö÷Òª·ÖÎöÓëREPLACEÇø±ğ£©
-	* updateÓï¾äÊ¹ÓÃwhere×Ó¾ä¶¨Î»±»¸üĞÂµÄ¼ÇÂ¼£»
-	* updateÓï¾ä¿ÉÒÔÒ»´Î¸üĞÂÒ»Ìõ¼ÇÂ¼£¬ Ò²¿ÉÒÔ¸üĞÂ¶àÌõ¼ÇÂ¼£¬ Ö»ÒªÕâ¶àÌõ¼ÇÂ¼¶¼¸´ºÏwhere×Ó¾äµÄÒªÇó£»
-	* updateÖ»»áÔÚÔ­¼ÇÂ¼ÉÏ¸üĞÂ×Ö¶ÎµÄÖµ£¬ ²»»áÉ¾³ıÔ­ÓĞ¼ÇÂ¼£¬ È»ºóÔÙ²åÈëĞÂ¼ÍÂ¼£»
-	* Èç¹ûÔÚupdateÓï¾äÖĞÃ»ÓĞÖ¸¶¨Ò»Ğ©×Ö¶Î£¬ ÄÇÃ´ÕâĞ©×Ö¶ÎÎ¬³ÖÔ­ÓĞµÄÖµ£¬ ¶ø²»»á±»ÖÃ¿Õ£»
+	* SQLITEä¸­çš„UPDATEè¯­å¥ï¼ˆä¸»è¦åˆ†æä¸REPLACEåŒºåˆ«ï¼‰
+	* updateè¯­å¥ä½¿ç”¨whereå­å¥å®šä½è¢«æ›´æ–°çš„è®°å½•ï¼›
+	* updateè¯­å¥å¯ä»¥ä¸€æ¬¡æ›´æ–°ä¸€æ¡è®°å½•ï¼Œ ä¹Ÿå¯ä»¥æ›´æ–°å¤šæ¡è®°å½•ï¼Œ åªè¦è¿™å¤šæ¡è®°å½•éƒ½å¤åˆwhereå­å¥çš„è¦æ±‚ï¼›
+	* updateåªä¼šåœ¨åŸè®°å½•ä¸Šæ›´æ–°å­—æ®µçš„å€¼ï¼Œ ä¸ä¼šåˆ é™¤åŸæœ‰è®°å½•ï¼Œ ç„¶åå†æ’å…¥æ–°çºªå½•ï¼›
+	* å¦‚æœåœ¨updateè¯­å¥ä¸­æ²¡æœ‰æŒ‡å®šä¸€äº›å­—æ®µï¼Œ é‚£ä¹ˆè¿™äº›å­—æ®µç»´æŒåŸæœ‰çš„å€¼ï¼Œ è€Œä¸ä¼šè¢«ç½®ç©ºï¼›
 	*/
 
 	char* errMsg;
@@ -590,7 +575,7 @@ void Endpoint::savePokemonToDB(const Pokemon &pokemon)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -616,8 +601,7 @@ void Endpoint::upgradeBattle(int pokemonid_1, int pokemonid_2)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-		strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -636,8 +620,7 @@ void Endpoint::upgradeBattle(int pokemonid_1, int pokemonid_2)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-		strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -658,28 +641,27 @@ void Endpoint::upgradeBattle(int pokemonid_1, int pokemonid_2)
 		return;
 	}
 
-	//°ÑĞ¡¾«Áé´æ´¢µ½Êı¾İ¿â
+	//æŠŠå°ç²¾çµå­˜å‚¨åˆ°æ•°æ®åº“
 	savePokemonToDB(p1);
-	//savePokemonToDB(p2);
 
-	//´æ´¢¶ÔÕ½½á¹û
+	//å­˜å‚¨å¯¹æˆ˜ç»“æœ
 	total_round++;
-	//Íæ¼Ò»ñÊ¤
+	//ç©å®¶è·èƒœ
 	if (winner == 1)
 	{
 		win_round++;
 	}
 
-	//¸üĞÂdatabase
+	//æ›´æ–°database
 	sql = "UPDATE Login SET win_round = " + to_string(win_round) + ", total_round = " + to_string(total_round)+" WHERE id = "+to_string(_PlayerID);
 	if (sqlite3_exec(db, sql.c_str(), sqlite3_nonusecallback, NULL, &errMsg) != SQLITE_OK)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << *errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
-	cout << "Endpoint[" << _PlayerID << "]: Ê¤ÂÊÒÑ¸üĞÂ£ºwin_round/total_round£º"<<win_round<<"/"<<total_round << endl;
+	cout << "Endpoint[" << _PlayerID << "]:win_round/total_round updated:"<<win_round<<"/"<<total_round << endl;
 }
 
 void Endpoint::changePokemonMaster(int pokemonid, int playerid)
@@ -695,7 +677,7 @@ void Endpoint::changePokemonMaster(int pokemonid, int playerid)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << *errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -719,7 +701,7 @@ void Endpoint::losePokemon(int playerid)
 	{
 		cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 		sqlite3_free(errMsg);
-		buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
+		buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 		return;
 	}
 	else
@@ -727,8 +709,7 @@ void Endpoint::losePokemon(int playerid)
 		if (nRow == 0)
 		{
 			cout << "Endpoint[" << _PlayerID << "]: invalid playerID:" << endl;
-			buf2 = "ÎŞĞ§µÄPlayerID";
-			strcpy(buf, "ÎŞĞ§µÄPlayerID");
+			buf2 = "æ— æ•ˆçš„PlayerID";
 			return;
 		}
 		else
@@ -741,13 +722,12 @@ void Endpoint::losePokemon(int playerid)
 			sqlite3_free_table(sqlResult);
 
 			int size = pokemons.size();
-			//¸ø»ØĞ¡¾«Áé
+			//ç»™å›å°ç²¾çµ
 			bool give_back = size == 1 ? true : false;
-			//Ñ¡³öµÄĞ¡¾«ÁéÊıÁ¿
+			//é€‰å‡ºçš„å°ç²¾çµæ•°é‡
 			int pick_num = size >= 3 ? 3 : size;
 			vector<int> pick_pokemon;
 
-			srand((unsigned)time(NULL));
 			for (; pick_num>0;)
 			{
 				int rand_num = rand() % size;
@@ -759,7 +739,7 @@ void Endpoint::losePokemon(int playerid)
 				}
 			}
 
-			//Ñ¡³öÒª±»Å×ÆúµÄĞ¡¾«Áé
+			//é€‰å‡ºè¦è¢«æŠ›å¼ƒçš„å°ç²¾çµ
 
 			sql = "SELECT id,name,race,atk,dfs,hp,speed,lv FROM Pokemon WHERE ";
 			sql += "id = " + to_string(pick_pokemon[0]);
@@ -772,8 +752,7 @@ void Endpoint::losePokemon(int playerid)
 			{
 				cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 				sqlite3_free(errMsg);
-				buf2 = "·şÎñÆ÷Êı¾İ¿â´íÎó";
-				strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
+				buf2 = "æœåŠ¡å™¨æ•°æ®åº“é”™è¯¯";
 				return;
 			}
 			else
@@ -807,7 +786,6 @@ void Endpoint::losePokemon(int playerid)
 				{
 					cout << "Endpoint[" << _PlayerID << "]: sqlite error:" << errMsg << endl;
 					sqlite3_free(errMsg);
-					strcpy(buf, "·şÎñÆ÷Êı¾İ¿â´íÎó");
 					return;
 				}
 			}

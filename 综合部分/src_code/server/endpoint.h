@@ -37,12 +37,11 @@ private:
 	SOCKET endpointSocket;
 	SOCKET clientSocket;
 
-	char buf[DEFAULT_BUFLEN];
 	string buf2;
 
 	bool _online;
 	bool running;
-	bool timing;
+	//bool timing;
 	bool generate_new_pokemon;
 
 	int win_round;
@@ -75,14 +74,12 @@ public:
 	void changePokemonMaster(int pokemonid, int playerid);
 	void losePokemon(int playerid);
 
-
-
 	// 控制线程
 	void process();
 	// 启动endpoint，分配端口号
 	int start();
 	// 结束endpoint
-	void terminateFunc();
+	//void terminateFunc();
 	// endpoint处理线程
 	void listenFunc();
 

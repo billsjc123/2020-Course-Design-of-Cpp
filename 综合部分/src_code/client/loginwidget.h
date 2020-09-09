@@ -10,6 +10,9 @@
 #include <QDir>
 #include <QTcpSocket>
 #include <QHostAddress>
+#include <QToolButton>
+#include <QMouseEvent>
+
 
 // 需要用到的字符串工具函数
 #include "strfunction.h"
@@ -29,8 +32,13 @@ public:
     void dealLoginMsg();
     explicit loginWidget(QWidget *parent = nullptr);
     ~loginWidget();
+    void paintEvent(QPaintEvent *event);
 
     strFunction strfunc;
+protected:
+    void mousePressEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
 
 private slots:
     void on_buttonBack_clicked();
@@ -39,7 +47,7 @@ private slots:
 signals:
     void login_signal(int,int);
 private:
-    //Ui::loginWidget *ui;
+    QPoint last;
     int port;
     QTcpSocket *clientSocket;
 };

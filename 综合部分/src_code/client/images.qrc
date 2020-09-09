@@ -14,6 +14,17 @@
         <file>images/badge2_sliver.png</file>
         <file>images/login_bg.jpg</file>
         <file>images/pokemonball.ico</file>
+        <file>images/login_widget_bg.jpg</file>
+        <file>images/login1.jfif</file>
+        <file>images/登出.png</file>
+        <file>images/修改密码.png</file>
+        <file>images/登出2.png</file>
+        <file>images/修改密码2.png</file>
+        <file>images/login3.png</file>
+        <file>images/login_bg2.jpg</file>
+        <file>images/关闭.png</file>
+        <file>images/最大化.png</file>
+        <file>images/最小化.png</file>
     </qresource>
     <qresource prefix="/music">
         <file>images/Chiru.mp3</file>

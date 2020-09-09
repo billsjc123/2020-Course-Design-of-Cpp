@@ -40,7 +40,7 @@ private:
 	// ¼àÌıÏß³Ì
 	bool running;
 	void ListenFunc();
-	//void TerminateFunc();
+	void TerminateFunc();
 
 public:
 	void dealClientInfo(const string &recv);

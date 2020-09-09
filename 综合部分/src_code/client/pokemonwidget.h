@@ -13,6 +13,8 @@
 #include <iostream>
 #include <QMediaPlaylist>
 #include <QMediaPlayer>
+#include <QMouseEvent>
+
 
 
 
@@ -24,7 +26,7 @@
 #include "registerwidget.h"
 
 
-#define DEFAULT_BUFLEN 1024
+
 
 enum State{MAIN,LOGIN,POKEMONLIST,USERLIST,LOGOUT,CNGPSW,POKEMONINFO,CNGPONAME,FIGHT,LOSEPOKEMON};
 enum FightState{NOFIGHT,LEVELUPMODE,DUELMODE};
@@ -61,6 +63,9 @@ public:
     strFunction strfunc;
 protected:
     void paintEvent(QPaintEvent *);
+    void mousePressEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
 
 private slots:
     void on_buttonLogin_clicked();
@@ -101,14 +106,13 @@ private slots:
     void on_pushButtonLosePokemon3_clicked();
 
 private:
+    QPoint last;
     Ui::PokemonWidget *ui;
     loginWidget *login;
     registerWidget *reg;
 
-    QSqlQuery query;
-    QSqlDatabase db;
     QTcpSocket *clientSocket; //通信套接字
-
+    QTcpSocket *onlineSocket; //通信套接字
     QMediaPlayer *mediaPlayer;
 
     State state;
@@ -117,7 +121,6 @@ private:
     int pokemonID; //present Pokemon
 
     bool showBadge; //只有展示玩家信息才展示徽章和胜率
-
 
     FightController fightcontroller;
 };

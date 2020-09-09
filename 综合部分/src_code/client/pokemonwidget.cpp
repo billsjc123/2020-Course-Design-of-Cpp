@@ -6,14 +6,14 @@ PokemonWidget::PokemonWidget(QWidget *parent)
     , ui(new Ui::PokemonWidget)
 {
     ui->setupUi(this);
+    //setWindowFlags (Qt::CustomizeWindowHint);
     setWindowIcon(QIcon(":/images/images/pokemonball.ico"));
-    //this->initStyles();
     //初始化Socket
     clientSocket = NULL;
-
+    onlineSocket = NULL;
     //分配空间，指定父对象
     clientSocket =new QTcpSocket(this);
-
+    onlineSocket =new QTcpSocket(this);
     //一开始是连接8888端口的Hub
     port = 8888;
 
@@ -25,17 +25,7 @@ PokemonWidget::PokemonWidget(QWidget *parent)
     login=new loginWidget();
     reg = new registerWidget();
 
-    //背景音乐
-//    QMediaPlaylist *playlist = new QMediaPlaylist();
-//    playlist->addMedia(QUrl::fromLocalFile("../images/Chiru.mp3"));
-//    playlist->setPlaybackMode(QMediaPlaylist::Loop);
-
-//    mediaPlayer->setPlaylist(playlist);
-//    mediaPlayer->setVolume(50);
-//    mediaPlayer->play();
-
     connect(login,&loginWidget::login_signal,this,&PokemonWidget::login_slot);
-
 
     connect(clientSocket,&QTcpSocket::readyRead,this,&PokemonWidget::dealServerMsg);
 
@@ -54,16 +44,53 @@ PokemonWidget::PokemonWidget(QWidget *parent)
         changeState(CNGPONAME);
     });
 
+    ui->pushButtonChgPsw->setToolTip("修改密码");
+    ui->pushButtonLouout->setToolTip("登出");
+
+    //自定义最小化、关闭等按钮
+    int wide = width();//获取界面的宽度
+
+    //隐藏标题栏
+    this->setWindowFlag(Qt::FramelessWindowHint);
+
+    //构建最小化、最大化、关闭按钮
+    QToolButton *minButton = new QToolButton(this);
+    QToolButton *closeButton= new QToolButton(this);
+    QToolButton *maxButton= new QToolButton(this);
+
+    //设置最小化、关闭按钮图标
+    minButton->setIcon(QPixmap(":/images/images/最小化.png"));
+    closeButton->setIcon(QPixmap(":/images/images/关闭.png"));
+    maxButton->setIcon(QPixmap(":/images/images/最大化.png"));
+
+    //设置最小化、关闭按钮在界面的位置
+    minButton->setGeometry(wide-155,20,50,50);
+    maxButton->setGeometry(wide-105,20,50,50);
+    closeButton->setGeometry(wide-55,20,50,50);
+
+    //设置鼠标移至按钮上的提示信息
+    minButton->setToolTip(tr("最小化"));
+    closeButton->setToolTip(tr("关闭"));
+    maxButton->setToolTip(tr("最大化"));
+
+    //设置最小化、关闭按钮的样式
+    minButton->setStyleSheet("background-color:transparent;");
+    closeButton->setStyleSheet("background-color:transparent;");
+    maxButton->setStyleSheet("background-color:transparent;");
+
+    connect(closeButton, &QToolButton::clicked, this, &PokemonWidget::close );
+    connect(minButton, &QToolButton::clicked, this,  &PokemonWidget::showMinimized );
+    connect(maxButton, &QToolButton::clicked, this,  &PokemonWidget::showMaximized );
+
     fightcontroller.mode=NOFIGHT;
     fightcontroller.initFight=true;
-    //初始化战斗界面的两个table
-    ui->tableUserList->horizontalHeader()->setStyleSheet("QHeaderView::section{background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(46,46,46),stop:1rgb(66,66,66));color: rgb(210,210,210);;padding-left: 4px;border: 1px solid#383838;}"); //设置表头背景色
-    ui->tableUserList->setAlternatingRowColors(true);
 
 
     ui->tablePokemon1->setColumnCount(1); //设置列数
     ui->tablePokemon1->setRowCount(8); //设置行数
-    ui->tablePokemon1->setVerticalHeaderLabels({tr("精灵ID"),tr("名字"),tr("种族"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tablePokemon1->setVerticalHeaderLabels({tr("POKEMONID"),tr("NAME"),tr("RACE"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tablePokemon1->verticalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+    ui->tablePokemon1->verticalHeader()->setFont(QFont("Terminal", 10 ));
     ui->tablePokemon1->horizontalHeader()->hide();
     QFont font = ui->tablePokemon1->verticalHeader()->font(); //先获取字体
     font.setBold(true); //字体设置为粗体
@@ -75,7 +102,10 @@ PokemonWidget::PokemonWidget(QWidget *parent)
 
     ui->tablePokemon2->setColumnCount(1); //设置列数
     ui->tablePokemon2->setRowCount(8); //设置行数
-    ui->tablePokemon2->setVerticalHeaderLabels({tr("精灵ID"),tr("名字"),tr("种族"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tablePokemon2->setVerticalHeaderLabels({tr("POKEMONID"),tr("NAME"),tr("RACE"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tablePokemon2->verticalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+    ui->tablePokemon2->verticalHeader()->setFont(QFont("Terminal", 10 ));
+
     ui->tablePokemon2->horizontalHeader()->hide();
     font = ui->tablePokemon2->verticalHeader()->font(); //先获取字体
     font.setBold(true); //字体设置为粗体
@@ -86,9 +116,13 @@ PokemonWidget::PokemonWidget(QWidget *parent)
     ui->tablePokemon2->setEditTriggers(QAbstractItemView::NoEditTriggers);//Table只读
 
     //初始化给出小精灵界面的3个table
+    //Table1
     ui->tableWidgetLosePokemon1->setColumnCount(1); //设置列数
     ui->tableWidgetLosePokemon1->setRowCount(8); //设置行数
-    ui->tableWidgetLosePokemon1->setVerticalHeaderLabels({tr("精灵ID"),tr("名字"),tr("种族"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tableWidgetLosePokemon1->setVerticalHeaderLabels({tr("POKEMONID"),tr("NAME"),tr("RACE"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tableWidgetLosePokemon1->verticalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+    ui->tableWidgetLosePokemon1->verticalHeader()->setFont(QFont("Terminal", 10 ));
+
     ui->tableWidgetLosePokemon1->horizontalHeader()->hide();
     font = ui->tableWidgetLosePokemon1->verticalHeader()->font(); //先获取字体
     font.setBold(true); //字体设置为粗体
@@ -98,10 +132,14 @@ PokemonWidget::PokemonWidget(QWidget *parent)
     // 设置属性
     ui->tableWidgetLosePokemon1->setEditTriggers(QAbstractItemView::NoEditTriggers);//Table只读
 
+    //Table2
     ui->tableWidgetLosePokemon2->setColumnCount(1); //设置列数
     ui->tableWidgetLosePokemon2->setRowCount(8); //设置行数
-    ui->tableWidgetLosePokemon2->setVerticalHeaderLabels({tr("精灵ID"),tr("名字"),tr("种族"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tableWidgetLosePokemon2->setVerticalHeaderLabels({tr("POKEMONID"),tr("NAME"),tr("RACE"),"ATK","DFS","HP","SPEED","LV"});
     ui->tableWidgetLosePokemon2->horizontalHeader()->hide();
+    ui->tableWidgetLosePokemon2->verticalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+    ui->tableWidgetLosePokemon2->verticalHeader()->setFont(QFont("Terminal", 10 ));
+
     font = ui->tableWidgetLosePokemon2->verticalHeader()->font(); //先获取字体
     font.setBold(true); //字体设置为粗体
     ui->tableWidgetLosePokemon2->verticalHeader()->setFont(font); //设置每一列的标题字体为粗体
@@ -109,11 +147,17 @@ PokemonWidget::PokemonWidget(QWidget *parent)
     ui->tableWidgetLosePokemon2->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); //高度自适应
     // 设置属性
     ui->tableWidgetLosePokemon2->setEditTriggers(QAbstractItemView::NoEditTriggers);//Table只读
+    ui->tableWidgetLosePokemon2->verticalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+    ui->tableWidgetLosePokemon2->verticalHeader()->setFont(QFont("Terminal", 10 ));
 
+    //Table3
     ui->tableWidgetLosePokemon3->setColumnCount(1); //设置列数
     ui->tableWidgetLosePokemon3->setRowCount(8); //设置行数
-    ui->tableWidgetLosePokemon3->setVerticalHeaderLabels({tr("精灵ID"),tr("名字"),tr("种族"),"ATK","DFS","HP","SPEED","LV"});
+    ui->tableWidgetLosePokemon3->setVerticalHeaderLabels({tr("POKEMONID"),tr("NAME"),tr("RACE"),"ATK","DFS","HP","SPEED","LV"});
     ui->tableWidgetLosePokemon3->horizontalHeader()->hide();
+
+    ui->tableWidgetLosePokemon3->verticalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+    ui->tableWidgetLosePokemon3->verticalHeader()->setFont(QFont("Terminal", 10 ));
     font = ui->tableWidgetLosePokemon3->verticalHeader()->font(); //先获取字体
     font.setBold(true); //字体设置为粗体
     ui->tableWidgetLosePokemon3->verticalHeader()->setFont(font); //设置每一列的标题字体为粗体
@@ -122,8 +166,9 @@ PokemonWidget::PokemonWidget(QWidget *parent)
     // 设置属性
     ui->tableWidgetLosePokemon3->setEditTriggers(QAbstractItemView::NoEditTriggers);//Table只读
 
+
     // 设置BadgeTip字体
-    QFont font_badge("YouYuan", 10, 75);
+    QFont font_badge("Terminal", 12, 75);
     ui->labelBadge1Tip->setFont(font_badge);
     ui->labelBadge2Tip->setFont(font_badge);
 
@@ -156,7 +201,7 @@ void PokemonWidget::paintEvent(QPaintEvent *)
 {
     //设置背景图片
     QPainter p(this);
-    p.drawPixmap(0,0,width(),height(),QPixmap(":/images/images/login_bg.jpg"));
+    p.drawPixmap(0,0,width(),height(),QPixmap(":/images/images/login_bg2.jpg"));
 }
 
 void PokemonWidget::changeState(State state)
@@ -323,7 +368,7 @@ void PokemonWidget::dealServerMsg()
                 QString attacker_name,opponent_name;
                 attacker_name = ui->tablePokemon1->item(1,0)->text();
                 opponent_name = ui->tablePokemon2->item(1,0)->text();
-                ui->textBrowserFightInfo->append("---------------战斗开始！--------------\n");
+                ui->textBrowserFightInfo->append("------------战斗开始！-----------\n");
                 ui->textBrowserFightInfo->append(tr((attacker_name+" vs "+opponent_name+"!\n\n").toStdString().c_str()));
                 QString str = "continue";
                 if(clientSocket->write(str.toLocal8Bit(),DEFAULT_BUFLEN)==-1)
@@ -334,7 +379,7 @@ void PokemonWidget::dealServerMsg()
             }
             else if(battleround==3)
             {
-                ui->textBrowserFightInfo->append("\n\n---------------战斗结束！--------------\n");
+                ui->textBrowserFightInfo->append("\n\n------------战斗结束！-----------\n");
                 detail = infos[1].split(' ');
                 if(detail[0]=='1')
                     ui->textBrowserFightInfo->append("获胜者是: "+ui->tablePokemon1->item(1,0)->text()+"!\n");
@@ -572,7 +617,7 @@ void PokemonWidget::dealServerMsg()
             QMessageBox::information(this,tr("修改密码成功"),tr("修改密码成功！"));
             changeState(MAIN);
         }
-        else if(str == "原密码错误")
+        else if(str == "Wrong original password")
         {
             qDebug()<<"原密码错误";
             ui->lineEditNewPsw->clear();
@@ -605,9 +650,12 @@ void PokemonWidget::dealServerMsg()
             // 设置格式
             ui->tableUserList->setWindowTitle(tr("用户列表"));
             ui->tableUserList->setColumnCount(4); //设置列数
-            ui->tableUserList->setHorizontalHeaderLabels({tr("玩家ID"), tr("用户名"),tr("状态"),tr("操作")});
+            ui->tableUserList->setHorizontalHeaderLabels({tr("PLAYERID"), tr("USERNAME"),tr("STATUS"),tr("OPERATION")});
             ui->tableUserList->setRowCount(players.size()); //设置行数
+
             ui->tableUserList->verticalHeader()->hide();
+            ui->tableUserList->horizontalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+            ui->tableUserList->horizontalHeader()->setFont(QFont("Terminal", 10 ));
             QFont font = ui->tableUserList->horizontalHeader()->font(); //先获取字体
             font.setBold(true); //字体设置为粗体
             ui->tableUserList->horizontalHeader()->setFont(font); //设置每一列的标题字体为粗体
@@ -697,13 +745,21 @@ void PokemonWidget::dealServerMsg()
             // 设置格式
             ui->tablePokemonList->setWindowTitle(tr("小精灵列表"));
             ui->tablePokemonList->setColumnCount(7); //设置列数
-            ui->tablePokemonList->setHorizontalHeaderLabels({tr("精灵ID"), tr("玩家ID"),tr("名字"),tr("种族"),"LV",tr("详细信息"),tr("出战")});
+            ui->tablePokemonList->setHorizontalHeaderLabels({tr("POKEMONID"), tr("PLAYERID"),tr("NAME"),tr("RACE"),"LV",tr("DETAIL"),tr("GO")});
             ui->tablePokemonList->setRowCount(pokemons.size()-2); //设置行数
+            ui->tablePokemonList->horizontalHeader()->setStyleSheet("QHeaderView::section{background:#666666;color:white;}");
+            ui->tablePokemonList->horizontalHeader()->setFont(QFont("Terminal", 10 ));
+
             ui->tablePokemonList->verticalHeader()->hide();
             QFont font = ui->tablePokemonList->horizontalHeader()->font(); //先获取字体
             font.setBold(true); //字体设置为粗体
             ui->tablePokemonList->horizontalHeader()->setFont(font); //设置每一列的标题字体为粗体
             ui->tablePokemonList->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); //宽度自适应
+            ui->tablePokemonList->horizontalHeader()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
+            ui->tablePokemonList->horizontalHeader()->setSectionResizeMode(0,QHeaderView::ResizeToContents);
+            ui->tablePokemonList->horizontalHeader()->setSectionResizeMode(4,QHeaderView::ResizeToContents);
+            ui->tablePokemonList->horizontalHeader()->setSectionResizeMode(5,QHeaderView::ResizeToContents);
+            ui->tablePokemonList->horizontalHeader()->setSectionResizeMode(6,QHeaderView::ResizeToContents);
 
             // 设置属性
             ui->tablePokemonList->setEditTriggers(QAbstractItemView::NoEditTriggers);//Table只读
@@ -719,9 +775,20 @@ void PokemonWidget::dealServerMsg()
                     win_rate=0;
                 else
                     win_rate = win_round/total_round;
-                ui->labelWinRound->setText("胜场数："+detail[0]);
-                ui->labelTotalRound->setText("总场数："+detail[1]);
-                ui->labelWinRate->setText("胜率："+QString::number(win_rate*100,'f',2)+'%');
+                //将胜率那一栏设置为显示
+                ui->labelWinRate->show();
+                ui->labelWinRound->show();
+                ui->labelTotalRound->show();
+                ui->labelWinRound->setText("WIN ROUND:"+detail[0]);
+                ui->labelTotalRound->setText("TOTAL ROUND:"+detail[1]);
+                ui->labelWinRate->setText("WINNING RATE:"+QString::number(win_rate*100,'f',2)+'%');
+            }
+            else
+            {
+                //将胜率那一栏设置为不显示
+                ui->labelWinRate->hide();
+                ui->labelWinRound->hide();
+                ui->labelTotalRound->hide();
             }
             // 徽章计数
             cntPokemon=0,cnt15=0;
@@ -735,12 +802,34 @@ void PokemonWidget::dealServerMsg()
                     cnt15++;
                 QTableWidgetItem* t ;
 
+                QString race = detail[3];
+                if(race=="2")
+                {
+                    race="Onix";
+                }
+                else if(race=="1")
+                {
+                    race="Snorlax";
+                }
+                else if(race=="3")
+                {
+                    race="Pidgey";
+                }
+                else if(race=="0")
+                {
+                    race="Primeape";
+                }
+                detail[3]=race;
+
                 for (int i=0;i<6;i++) {
                     t= new QTableWidgetItem(detail[i]);
                     t->setFlags(t->flags()^Qt::ItemIsEnabled);
                     ui->tablePokemonList->setItem(tableRowIndex,i,t);
                 }
-                QPushButton* button1 = new QPushButton(tr("查看详细信息"),this);
+
+                QPushButton* button1 = new QPushButton(tr("详细信息"),this);
+                button1->setFont(QFont("Terminal",7));
+                button1->setStyleSheet("color:white");
                 ui->tablePokemonList->setCellWidget(tableRowIndex,5,button1);
 
                 connect(button1,&QPushButton::clicked,this,
@@ -756,9 +845,12 @@ void PokemonWidget::dealServerMsg()
                         button2 = new QPushButton(tr("就决定是你了！"),this);
                     else
                         button2 = new QPushButton(tr("和我决斗吧！"),this);
+
                 }
                 else
                     button2 = new QPushButton(tr("无对战"),this);
+                button2->setFont(QFont("Terminal",7));
+                button2->setStyleSheet("color:white");
                 ui->tablePokemonList->setCellWidget(tableRowIndex,6,button2);
                 if(fightcontroller.mode==NOFIGHT)
                     button2->setDisabled(true);
@@ -869,7 +961,9 @@ void PokemonWidget::dealServerMsg()
             ui->tablePokemonDetail->setWindowTitle(tr("小精灵详细信息"));
             ui->tablePokemonDetail->setColumnCount(1); //设置列数
             ui->tablePokemonDetail->setRowCount(8); //设置行数
-            ui->tablePokemonDetail->setVerticalHeaderLabels({tr("名字"),tr("种族"),"ATK","DFS","HP","SPEED","LV","EP"});
+            ui->tablePokemonDetail->setVerticalHeaderLabels({"NAME","RACE","ATK","DFS","HP","SPEED","LV","EP"});
+            ui->tablePokemonDetail->verticalHeader()->setStyleSheet("QHeaderView::section{background:#666666;}");
+            ui->tablePokemonDetail->verticalHeader()->setFont(QFont("Terminal", 10 ));
             ui->tablePokemonDetail->horizontalHeader()->hide();
             QFont font = ui->tablePokemonDetail->verticalHeader()->font(); //先获取字体
             font.setBold(true); //字体设置为粗体
@@ -1084,7 +1178,8 @@ void PokemonWidget::on_pushButtonPoListBack_clicked()
 
 void PokemonWidget::on_pushButtonPoInfoBack_clicked()
 {
-    changeState(POKEMONLIST);
+    //changeState(POKEMONLIST);
+    ui->pushButtonPoList->click();
     ui->pushButtonPoList->setDisabled(false);
 }
 
@@ -1149,7 +1244,7 @@ void PokemonWidget::on_pushButtonLosePokemon1_clicked()
 
 void PokemonWidget::on_pushButtonLosePokemon2_clicked()
 {
-    changePokemonMaster(ui->tableWidgetLosePokemon1->item(0,0)->text().toInt(),0);
+    changePokemonMaster(ui->tableWidgetLosePokemon2->item(0,0)->text().toInt(),0);
     QMessageBox::information(this,tr("小精灵已给出"),tr("您的小精灵被系统夺走啦，你可以通过对决战将其赢回来！"));
     changeState(MAIN);
     ui->tableWidgetLosePokemon1->clear();
@@ -1162,7 +1257,7 @@ void PokemonWidget::on_pushButtonLosePokemon2_clicked()
 
 void PokemonWidget::on_pushButtonLosePokemon3_clicked()
 {
-    changePokemonMaster(ui->tableWidgetLosePokemon1->item(0,0)->text().toInt(),0);
+    changePokemonMaster(ui->tableWidgetLosePokemon3->item(0,0)->text().toInt(),0);
     QMessageBox::information(this,tr("小精灵已给出"),tr("您的小精灵被系统夺走啦，你可以通过对决战将其赢回来！"));
     changeState(MAIN);
     ui->tableWidgetLosePokemon1->clear();
@@ -1172,3 +1267,22 @@ void PokemonWidget::on_pushButtonLosePokemon3_clicked()
     ui->labelLosePokemon2->clear();
     ui->labelLosePokemon3->clear();
 }
+
+void PokemonWidget::mousePressEvent(QMouseEvent *e)
+{
+    last=e->globalPos();
+}
+void PokemonWidget::mouseMoveEvent(QMouseEvent *e)
+{
+    int dx = e->globalX() - last.x();
+        int dy = e->globalY() - last.y();
+        last = e->globalPos();
+        move(x()+dx, y()+dy);
+}
+void PokemonWidget::mouseReleaseEvent(QMouseEvent *e)
+{
+    int dx = e->globalX() - last.x();
+    int dy = e->globalY() - last.y();
+    move(x()+dx, y()+dy);
+}
+

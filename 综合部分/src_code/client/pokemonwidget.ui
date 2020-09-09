@@ -12,9 +12,9 @@
   </property>
   <property name="font">
    <font>
-    <family>幼圆</family>
-    <weight>50</weight>
-    <bold>false</bold>
+    <family>Terminal</family>
+    <weight>75</weight>
+    <bold>true</bold>
    </font>
   </property>
   <property name="windowTitle">
@@ -24,13 +24,16 @@
    <property name="geometry">
     <rect>
      <x>-20</x>
-     <y>-10</y>
+     <y>0</y>
      <width>1251</width>
      <height>781</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="LoginPage">
     <widget class="QWidget" name="layoutWidget">
@@ -56,23 +59,22 @@
         </property>
         <property name="font">
          <font>
-          <family>幼圆</family>
+          <family>Terminal</family>
+          <pointsize>30</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton#buttonLogin
+         <string notr="true">
+QPushButton#buttonLogin
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#buttonLogin:hover
-{
-background-color:rgb(0,130,150);
-border:2px solid #5F92B2;
+{ background-color:#666666;
+
 border-radius:5px;
 color:white;
 }
@@ -86,7 +88,7 @@ color:white;
 </string>
         </property>
         <property name="text">
-         <string>登录</string>
+         <string>LOG IN</string>
         </property>
        </widget>
       </item>
@@ -113,7 +115,8 @@ color:white;
         </property>
         <property name="font">
          <font>
-          <family>幼圆</family>
+          <family>Terminal</family>
+          <pointsize>19</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -121,15 +124,15 @@ color:white;
         <property name="styleSheet">
          <string notr="true">QPushButton#buttonRegister
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
+
+
 	border-radius:5px;
 	color:white
 } 
 QPushButton#buttonRegister:hover
 {
-background-color:rgb(0,130,150);
-border:2px solid #5F92B2;
+ background-color:#666666;
+
 border-radius:5px;
 color:white;
 }
@@ -142,7 +145,7 @@ color:white;
 }</string>
         </property>
         <property name="text">
-         <string>注册</string>
+         <string>REGISTER</string>
         </property>
        </widget>
       </item>
@@ -169,7 +172,8 @@ color:white;
         </property>
         <property name="font">
          <font>
-          <family>幼圆</family>
+          <family>Terminal</family>
+          <pointsize>19</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -177,15 +181,13 @@ color:white;
         <property name="styleSheet">
          <string notr="true">QPushButton#buttonQuit
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#buttonQuit:hover
 {
-background-color:rgb(0,130,150);
-border:2px solid #5F92B2;
+background-color:#666666;
+
 border-radius:5px;
 color:white;
 }
@@ -198,7 +200,7 @@ color:white;
 }</string>
         </property>
         <property name="text">
-         <string>退出</string>
+         <string>QUIT</string>
         </property>
        </widget>
       </item>
@@ -210,54 +212,12 @@ color:white;
      <property name="geometry">
       <rect>
        <x>750</x>
-       <y>100</y>
+       <y>130</y>
        <width>341</width>
        <height>542</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="MainLayout">
-      <item>
-       <widget class="QPushButton" name="pushButtonChgPsw">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>80</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton#pushButtonChgPsw
-{
-    color:white;
-    background-color:rgb(14 , 150 , 254);
-    border-radius:5px;
-}
- 
-QPushButton#pushButtonChgPsw:hover
-{
-    color:white;
-    background-color:rgb(44 , 137 , 255);
-}
- 
-QPushButton#pushButtonChgPsw:pressed
-{
-    color:white;
-    background-color:rgb(14 , 135 , 228);
-    padding-left:3px;
-    padding-top:3px;
-}
-</string>
-        </property>
-        <property name="text">
-         <string>修改密码</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <spacer name="verticalSpacer_3">
         <property name="orientation">
@@ -281,6 +241,8 @@ QPushButton#pushButtonChgPsw:pressed
         </property>
         <property name="font">
          <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -289,14 +251,14 @@ QPushButton#pushButtonChgPsw:pressed
          <string notr="true">QPushButton#pushButtonLevelUp
 {
     color:white;
-    background-color:rgb(14 , 150 , 254);
+
     border-radius:5px;
 }
  
 QPushButton#pushButtonLevelUp:hover
 {
     color:white;
-    background-color:rgb(44 , 137 , 255);
+    background-color:#666666;
 }
  
 QPushButton#pushButtonLevelUp:pressed
@@ -309,7 +271,7 @@ QPushButton#pushButtonLevelUp:pressed
 </string>
         </property>
         <property name="text">
-         <string>升级模式</string>
+         <string>LEVELUP MODE</string>
         </property>
        </widget>
       </item>
@@ -336,6 +298,8 @@ QPushButton#pushButtonLevelUp:pressed
         </property>
         <property name="font">
          <font>
+          <family>Terminal</family>
+          <pointsize>15</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -344,14 +308,15 @@ QPushButton#pushButtonLevelUp:pressed
          <string notr="true">QPushButton#pushButtonDuel
 {
     color:white;
-    background-color:rgb(14 , 150 , 254);
+
     border-radius:5px;
 }
  
 QPushButton#pushButtonDuel:hover
 {
+	background-color:#666666;
     color:white;
-    background-color:rgb(44 , 137 , 255);
+    
 }
  
 QPushButton#pushButtonDuel:pressed
@@ -364,7 +329,7 @@ QPushButton#pushButtonDuel:pressed
 </string>
         </property>
         <property name="text">
-         <string>决斗模式</string>
+         <string>DUEL MODE</string>
         </property>
        </widget>
       </item>
@@ -391,6 +356,8 @@ QPushButton#pushButtonDuel:pressed
         </property>
         <property name="font">
          <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -399,14 +366,14 @@ QPushButton#pushButtonDuel:pressed
          <string notr="true">QPushButton#pushButtonUserList
 {
     color:white;
-    background-color:rgb(14 , 150 , 254);
+
     border-radius:5px;
 }
  
 QPushButton#pushButtonUserList:hover
 {
     color:white;
-    background-color:rgb(44 , 137 , 255);
+     background-color:#666666;
 }
  
 QPushButton#pushButtonUserList:pressed
@@ -419,7 +386,7 @@ QPushButton#pushButtonUserList:pressed
 </string>
         </property>
         <property name="text">
-         <string>查看用户列表</string>
+         <string>USER LIST</string>
         </property>
        </widget>
       </item>
@@ -446,6 +413,8 @@ QPushButton#pushButtonUserList:pressed
         </property>
         <property name="font">
          <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -454,14 +423,14 @@ QPushButton#pushButtonUserList:pressed
          <string notr="true">QPushButton#pushButtonPoList
 {
     color:white;
-    background-color:rgb(14 , 150 , 254);
+
     border-radius:5px;
 }
  
 QPushButton#pushButtonPoList:hover
 {
     color:white;
-    background-color:rgb(44 , 137 , 255);
+    background-color:#666666;
 }
  
 QPushButton#pushButtonPoList:pressed
@@ -474,7 +443,7 @@ QPushButton#pushButtonPoList:pressed
 </string>
         </property>
         <property name="text">
-         <string>查看小精灵列表</string>
+         <string>POKEMON LIST</string>
         </property>
        </widget>
       </item>
@@ -491,32 +460,107 @@ QPushButton#pushButtonPoList:pressed
         </property>
        </spacer>
       </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonLouout">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>80</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton#pushButtonLouout
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="pushButtonChgPsw">
+     <property name="geometry">
+      <rect>
+       <x>1090</x>
+       <y>200</y>
+       <width>90</width>
+       <height>90</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="toolTip">
+      <string extracomment="修改密码"/>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButtonChgPsw
+{
+	border-image: url(:/images/images/修改密码.png);
+}
+ 
+QPushButton#pushButtonChgPsw:hover
+{
+	border-image: url(:/images/images/修改密码2.png);
+    color:white;
+};
+ 
+QPushButton#pushButtonChgPsw:pressed
 {
     color:white;
-    background-color:rgb(14 , 150 , 254);
+    background-color:rgb(14 , 135 , 228);
+    padding-left:3px;
+    padding-top:3px;
+}
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="autoDefault">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonLouout">
+     <property name="geometry">
+      <rect>
+       <x>1080</x>
+       <y>460</y>
+       <width>101</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QPushButton#pushButtonLouout
+{
+border-image: url(:/images/images/登出.png);
+    color:white;
     border-radius:5px;
 }
  
 QPushButton#pushButtonLouout:hover
 {
+border-image: url(:/images/images/登出2.png);
     color:white;
-    background-color:rgb(44 , 137 , 255);
 }
  
 QPushButton#pushButtonLouout:pressed
@@ -527,22 +571,30 @@ QPushButton#pushButtonLouout:pressed
     padding-top:3px;
 }
 </string>
-        </property>
-        <property name="text">
-         <string>登出</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="cngPswPage">
+    <property name="font">
+     <font>
+      <family>Terminal</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(102, 102, 102);</string>
+    </property>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>700</x>
-       <y>160</y>
-       <width>461</width>
+       <x>430</x>
+       <y>170</y>
+       <width>506</width>
        <height>431</height>
       </rect>
      </property>
@@ -551,18 +603,26 @@ QPushButton#pushButtonLouout:pressed
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="labelNewPsw2">
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>15</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel#labelNewPsw2
 {
-font: 25 10pt Youyuan;                        
-border-radius: 4px;                                            
-background-color: argb(60, 60, 60, 130);          
-                              
+font: 75 15pt Terminal;                        
+border-radius: 4px;                                                
+color:white;                              
 }
 </string>
           </property>
           <property name="text">
-           <string>请再输入新密码：</string>
+           <string>PLEASE ENTER AGAIN:</string>
           </property>
          </widget>
         </item>
@@ -581,6 +641,15 @@ background-color: argb(60, 60, 60, 130);
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditNewPsw2">
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;</string>
+          </property>
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
@@ -592,17 +661,26 @@ background-color: argb(60, 60, 60, 130);
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="labelNewPsw">
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>22</pointsize>
+            <weight>12</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel#labelNewPsw
 {
-font: 25 10pt Youyuan;                        
-border-radius: 4px;                                            
-background-color: argb(60, 60, 60, 130);          
-                              
+color:white;
+font: 100 22pt Terminal;                        
+border-radius: 4px;                                             
+                             
 }</string>
           </property>
           <property name="text">
-           <string>新密码：</string>
+           <string>NEW PASSWORD:</string>
           </property>
          </widget>
         </item>
@@ -621,6 +699,15 @@ background-color: argb(60, 60, 60, 130);
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditNewPsw">
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;</string>
+          </property>
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
@@ -638,18 +725,26 @@ background-color: argb(60, 60, 60, 130);
             <height>60</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">QPushButton#pushButtonCngPswAdmit
 {
     color:white;
-    background-color:rgb(14 , 150 , 254);
+    background-color:rgb(102,102,102);
     border-radius:5px;
 }
  
 QPushButton#pushButtonCngPswAdmit:hover
 {
     color:white;
-    background-color:rgb(44 , 137 , 255);
+    background-color:rgb(138,138,138);
 }
  
 QPushButton#pushButtonCngPswAdmit:pressed
@@ -662,7 +757,7 @@ QPushButton#pushButtonCngPswAdmit:pressed
 </string>
           </property>
           <property name="text">
-           <string>修改密码</string>
+           <string>CHANGE PASSWORD</string>
           </property>
          </widget>
         </item>
@@ -687,18 +782,26 @@ QPushButton#pushButtonCngPswAdmit:pressed
             <height>60</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">QPushButton#pushButtonCngPswBack
 {
     color:white;
-    background-color:rgb(14 , 150 , 254);
+    background-color:rgb(102,102,102);
     border-radius:5px;
 }
  
 QPushButton#pushButtonCngPswBack:hover
 {
     color:white;
-    background-color:rgb(44 , 137 , 255);
+    background-color:rgb(138,138,138);
 }
  
 QPushButton#pushButtonCngPswBack:pressed
@@ -711,7 +814,7 @@ QPushButton#pushButtonCngPswBack:pressed
 </string>
           </property>
           <property name="text">
-           <string>返回</string>
+           <string>BACK</string>
           </property>
          </widget>
         </item>
@@ -721,17 +824,25 @@ QPushButton#pushButtonCngPswBack:pressed
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLabel" name="labelOldPsw">
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">QLabel#labelOldPsw
 {
-font: 25 10pt Youyuan;                        
-border-radius: 4px;                                            
-background-color: argb(60, 60, 60, 130);          
-                              
+color:white;
+font: 75 12pt Terminal;                        
+border-radius: 4px;                                                                    
 }</string>
           </property>
           <property name="text">
-           <string>原密码：</string>
+           <string>OLD PASSWORD:</string>
           </property>
          </widget>
         </item>
@@ -750,6 +861,15 @@ background-color: argb(60, 60, 60, 130);
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditOldPsw">
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
@@ -776,16 +896,27 @@ background-color: argb(60, 60, 60, 130);
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QTabWidget[lightblue = &quot;true&quot;] QTabBar::tab{    	
+      <string notr="true">background-color: rgb(102, 102, 102);
+color:white;
+QTabWidget[lightblue = &quot;true&quot;] QTabBar::tab{ 
+	background-color: rgb(102, 102, 102);   	
 	border-top:1px solid rgb(249,249,249);
 	border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 	max-height:20px;
 	min-height:20px;
 	min-width:95px;
-	font-family:microsoft yahei;
-	color:rgb(50,50,50);
+	font-family:Terminal;
+	color:rgb(255,255,255);
 	font-size:13px;
 	padding:0px 0px 0px 0px;
 	border-image:url();
@@ -817,49 +948,75 @@ QTabWidget[lightblue = &quot;true&quot;]::pane {
     <widget class="QPushButton" name="pushButtonUserListBack">
      <property name="geometry">
       <rect>
-       <x>890</x>
-       <y>340</y>
+       <x>900</x>
+       <y>630</y>
        <width>201</width>
        <height>81</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButtonUserListBack
+{
+    color:white;
+    border-radius:6px;
+}
+ 
+QPushButton#pushButtonUserListBack:hover
+{
+    color:white;
+    background-color:#666666;
+	border-radius:6px;
+}
+ 
+QPushButton#pushButtonUserListBack:pressed
+{
+    color:white;
+    background-color:rgb(14 , 135 , 228);
+    padding-left:3px;
+    padding-top:3px;
+}
+</string>
+     </property>
      <property name="text">
-      <string>返回</string>
+      <string>BACK</string>
      </property>
     </widget>
    </widget>
    <widget class="QWidget" name="PokemonListPage">
-    <widget class="QTableWidget" name="tablePokemonList">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>180</y>
-       <width>731</width>
-       <height>521</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButtonPoListBack">
      <property name="geometry">
       <rect>
        <x>890</x>
        <y>610</y>
-       <width>291</width>
+       <width>251</width>
        <height>91</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton#pushButtonPoListBack
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#pushButtonPoListBack:hover
 {
-	background-color:rgb(0,130,150);
-	border:2px solid #5F92B2;
+	background-color:#666666;
 	border-radius:5px;
 	color:white;
 }
@@ -880,7 +1037,7 @@ QPushButton#pushButtonPoListBack:hover:pressed
      <property name="geometry">
       <rect>
        <x>950</x>
-       <y>120</y>
+       <y>130</y>
        <width>150</width>
        <height>150</height>
       </rect>
@@ -899,7 +1056,7 @@ QPushButton#pushButtonPoListBack:hover:pressed
      <property name="geometry">
       <rect>
        <x>950</x>
-       <y>380</y>
+       <y>450</y>
        <width>150</width>
        <height>150</height>
       </rect>
@@ -917,9 +1074,9 @@ QPushButton#pushButtonPoListBack:hover:pressed
     <widget class="QLabel" name="labelBadge2Tip">
      <property name="geometry">
       <rect>
-       <x>880</x>
-       <y>310</y>
-       <width>111</width>
+       <x>890</x>
+       <y>390</y>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -932,23 +1089,32 @@ QPushButton#pushButtonPoListBack:hover:pressed
      <property name="styleSheet">
       <string notr="true">QLabel#labelBadge2Tip
 {
-font: 25 10pt Youyuan;                        
+font: 25 12pt Terminal;                        
 border-radius: 4px;                                                  
-                              
+color:white;              
 }</string>
      </property>
      <property name="text">
-      <string>高级宠物徽章：</string>
+      <string>HIGH-LEVEL BADGET:</string>
      </property>
     </widget>
     <widget class="QLabel" name="labelBadge1Tip">
      <property name="geometry">
       <rect>
-       <x>880</x>
-       <y>50</y>
-       <width>111</width>
+       <x>890</x>
+       <y>70</y>
+       <width>141</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>3</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="focusPolicy">
       <enum>Qt::StrongFocus</enum>
@@ -959,68 +1125,121 @@ border-radius: 4px;
      <property name="styleSheet">
       <string notr="true">QLabel#labelBadge1Tip
 {
-font: 25 10pt Youyuan;                        
+color:white;
+font: 25 12pt Terminal;                        
 border-radius: 4px;                                            
                               
 }</string>
      </property>
      <property name="text">
-      <string>宠物个数徽章：</string>
+      <string>NUMBER BADGET:</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>90</y>
-       <width>731</width>
-       <height>91</height>
+       <x>90</x>
+       <y>70</y>
+       <width>771</width>
+       <height>631</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>2</number>
+      </property>
       <item>
-       <widget class="QLabel" name="labelWinRound">
-        <property name="styleSheet">
-         <string notr="true">QLabel#labelWinRound
+       <layout class="QHBoxLayout" name="winroundLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="labelWinRound">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel#labelWinRound
 {
-font: 75 20pt Youyuan;                        
-border-radius: 4px;
-color:red;                                            
-                              
+font: 75 12pt Terminal;                        
+border-radius: 4px;                                   
+color:white;
 }</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelTotalRound">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Terminal</family>
+            <pointsize>12</pointsize>
+            <weight>9</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel#labelTotalRound
+{
+font: 75 12pt Terminal;                        
+border-radius: 4px;                                            
+color:white;                              
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelWinRate">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel#labelWinRate
+{
+font: 75 12pt Terminal;                        
+border-radius: 4px;                                            
+color:white;              
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLabel" name="labelTotalRound">
+       <widget class="QTableWidget" name="tablePokemonList">
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QLabel#labelTotalRound
-{
-font: 75 20pt Youyuan;                        
-border-radius: 4px;                                            
-color:red;                              
-}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelWinRate">
-        <property name="styleSheet">
-         <string notr="true">QLabel#labelWinRate
-{
-font: 75 20pt Youyuan;                        
-border-radius: 4px;                                            
-                              
-}</string>
-        </property>
-        <property name="text">
-         <string/>
+         <string notr="true">color:white;
+background-color:#666666</string>
         </property>
        </widget>
       </item>
@@ -1031,20 +1250,38 @@ border-radius: 4px;
     <widget class="QTableWidget" name="tablePokemonDetail">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>110</y>
-       <width>521</width>
+       <x>130</x>
+       <y>70</y>
+       <width>522</width>
        <height>611</height>
       </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>521</width>
+       <height>611</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(102, 102, 102);
+color:white;</string>
      </property>
     </widget>
     <widget class="QLabel" name="labelImg">
      <property name="geometry">
       <rect>
-       <x>750</x>
-       <y>110</y>
-       <width>381</width>
-       <height>361</height>
+       <x>700</x>
+       <y>70</y>
+       <width>411</width>
+       <height>381</height>
       </rect>
      </property>
      <property name="text">
@@ -1054,10 +1291,10 @@ border-radius: 4px;
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>830</x>
-       <y>460</y>
-       <width>221</width>
-       <height>268</height>
+       <x>750</x>
+       <y>360</y>
+       <width>311</width>
+       <height>401</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1072,21 +1309,26 @@ border-radius: 4px;
         <property name="minimumSize">
          <size>
           <width>200</width>
-          <height>50</height>
+          <height>80</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton#pushButtonChgName
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#pushButtonChgName:hover
 {
-	background-color:rgb(0,130,150);
-	border:2px solid #5F92B2;
+	background-color:#666666;
 	border-radius:5px;
 	color:white;
 }
@@ -1100,7 +1342,7 @@ QPushButton#pushButtonChgName:hover:pressed
 </string>
         </property>
         <property name="text">
-         <string>修改名字</string>
+         <string>CHANGE NAME</string>
         </property>
        </widget>
       </item>
@@ -1115,21 +1357,26 @@ QPushButton#pushButtonChgName:hover:pressed
         <property name="minimumSize">
          <size>
           <width>200</width>
-          <height>50</height>
+          <height>80</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton#pushButtonPoInfoBack
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#pushButtonPoInfoBack:hover
 {
-	background-color:rgb(0,130,150);
-	border:2px solid #5F92B2;
+	background-color:#666666;
 	border-radius:5px;
 	color:white;
 }
@@ -1143,7 +1390,7 @@ QPushButton#pushButtonPoInfoBack:hover:pressed
 </string>
         </property>
         <property name="text">
-         <string>返回</string>
+         <string>BACK</string>
         </property>
        </widget>
       </item>
@@ -1159,6 +1406,18 @@ QPushButton#pushButtonPoInfoBack:hover:pressed
        <width>391</width>
        <height>481</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:#666666;
+color:white;</string>
      </property>
     </widget>
     <widget class="QLabel" name="labelPokemon1">
@@ -1183,21 +1442,45 @@ QPushButton#pushButtonPoInfoBack:hover:pressed
        <height>331</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:#666666;
+color:white;</string>
+     </property>
     </widget>
     <widget class="QTableWidget" name="tablePokemon2">
      <property name="geometry">
       <rect>
-       <x>920</x>
+       <x>890</x>
        <y>340</y>
        <width>271</width>
        <height>331</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;
+background-color:#666666;</string>
+     </property>
     </widget>
     <widget class="QLabel" name="labelPokemon2">
      <property name="geometry">
       <rect>
-       <x>950</x>
+       <x>910</x>
        <y>80</y>
        <width>221</width>
        <height>211</height>
@@ -1216,6 +1499,17 @@ QPushButton#pushButtonPoInfoBack:hover:pressed
        <height>21</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;</string>
+     </property>
      <property name="maximum">
       <number>100</number>
      </property>
@@ -1232,11 +1526,22 @@ QPushButton#pushButtonPoInfoBack:hover:pressed
     <widget class="QProgressBar" name="progressBarPokemon2">
      <property name="geometry">
       <rect>
-       <x>900</x>
+       <x>870</x>
        <y>310</y>
        <width>331</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;</string>
      </property>
      <property name="value">
       <number>24</number>
@@ -1254,18 +1559,23 @@ QPushButton#pushButtonPoInfoBack:hover:pressed
        <height>101</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton#pushButtonBackFromBattle
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#pushButtonBackFromBattle:hover
 {
-	background-color:rgb(0,130,150);
-	border:2px solid #5F92B2;
+	background-color:#666666;
 	border-radius:5px;
 	color:white;
 }
@@ -1279,7 +1589,7 @@ QPushButton#pushButtonBackFromBattle:hover:pressed
 </string>
      </property>
      <property name="text">
-      <string>返回主菜单</string>
+      <string>BACK TO MENU</string>
      </property>
     </widget>
    </widget>
@@ -1332,18 +1642,23 @@ QPushButton#pushButtonBackFromBattle:hover:pressed
        <height>71</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton#pushButtonLosePokemon2
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#pushButtonLosePokemon2:hover
 {
-	background-color:rgb(0,130,150);
-	border:2px solid #5F92B2;
+	background-color:#666666;
 	border-radius:5px;
 	color:white;
 }
@@ -1357,7 +1672,7 @@ QPushButton#pushButtonLosePokemon2:hover:pressed
 </string>
      </property>
      <property name="text">
-      <string>送出小精灵</string>
+      <string>SAY BYEBYE~~</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButtonLosePokemon3">
@@ -1369,18 +1684,23 @@ QPushButton#pushButtonLosePokemon2:hover:pressed
        <height>71</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton#pushButtonLosePokemon3
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#pushButtonLosePokemon3:hover
 {
-	background-color:rgb(0,130,150);
-	border:2px solid #5F92B2;
+	background-color:#666666;
 	border-radius:5px;
 	color:white;
 }
@@ -1394,7 +1714,7 @@ QPushButton#pushButtonLosePokemon3:hover:pressed
 </string>
      </property>
      <property name="text">
-      <string>送出小精灵</string>
+      <string>SAY 再见~~</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButtonLosePokemon1">
@@ -1406,18 +1726,23 @@ QPushButton#pushButtonLosePokemon3:hover:pressed
        <height>71</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Terminal</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton#pushButtonLosePokemon1
 {  
-    background-color:rgb(134,183,200);
-	border:2px solid #5F92B2;
 	border-radius:5px;
 	color:white
 } 
 QPushButton#pushButtonLosePokemon1:hover
 {
-	background-color:rgb(0,130,150);
-	border:2px solid #5F92B2;
+	background-color:#666666;
 	border-radius:5px;
 	color:white;
 }
@@ -1431,7 +1756,7 @@ QPushButton#pushButtonLosePokemon1:hover:pressed
 </string>
      </property>
      <property name="text">
-      <string>送出小精灵</string>
+      <string>SAY GOODBYE~~</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget">
@@ -1445,7 +1770,20 @@ QPushButton#pushButtonLosePokemon1:hover:pressed
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QTableWidget" name="tableWidgetLosePokemon1"/>
+       <widget class="QTableWidget" name="tableWidgetLosePokemon1">
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;
+background-color:#666666;</string>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer name="horizontalSpacer_5">
@@ -1461,7 +1799,20 @@ QPushButton#pushButtonLosePokemon1:hover:pressed
        </spacer>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidgetLosePokemon2"/>
+       <widget class="QTableWidget" name="tableWidgetLosePokemon2">
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;
+background-color:#666666;</string>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer name="horizontalSpacer_6">
@@ -1477,7 +1828,20 @@ QPushButton#pushButtonLosePokemon1:hover:pressed
        </spacer>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidgetLosePokemon3"/>
+       <widget class="QTableWidget" name="tableWidgetLosePokemon3">
+        <property name="font">
+         <font>
+          <family>Terminal</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;
+background-color:#666666;</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

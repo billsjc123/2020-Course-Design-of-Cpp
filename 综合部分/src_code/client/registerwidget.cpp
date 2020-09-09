@@ -13,11 +13,53 @@ registerWidget::registerWidget(QWidget *parent) :
     clientSocket =new QTcpSocket(this);
 
     connect(clientSocket,&QTcpSocket::readyRead,this,&registerWidget::dealRegMsg);
+
+    //构建最小化、最大化、关闭按钮
+    QToolButton *minButton = new QToolButton(this);
+    QToolButton *closeButton= new QToolButton(this);
+    QToolButton *maxButton= new QToolButton(this);
+
+    //设置最小化、关闭按钮图标
+    minButton->setIcon(QPixmap(":/images/images/最小化.png"));
+    closeButton->setIcon(QPixmap(":/images/images/关闭.png"));
+    maxButton->setIcon(QPixmap(":/images/images/最大化.png"));
+
+    setWindowFlag(Qt::FramelessWindowHint);
+
+    int wide = width();
+
+    //设置最小化、关闭按钮在界面的位置
+    minButton->setGeometry(wide-115,20,30,30);
+    maxButton->setGeometry(wide-85,20,30,30);
+    closeButton->setGeometry(wide-55,20,30,30);
+
+
+    //设置鼠标移至按钮上的提示信息
+    minButton->setToolTip(tr("最小化"));
+    closeButton->setToolTip(tr("关闭"));
+    maxButton->setToolTip(tr("最大化"));
+
+    //设置最小化、关闭按钮的样式
+    minButton->setStyleSheet("background-color:transparent;");
+    closeButton->setStyleSheet("background-color:transparent;");
+    maxButton->setStyleSheet("background-color:transparent;");
+
+    connect(closeButton, &QToolButton::clicked, this, &registerWidget::close );
+    connect(minButton, &QToolButton::clicked, this,  &registerWidget::showMinimized );
+    connect(maxButton, &QToolButton::clicked, this,  &registerWidget::showMaximized );
 }
 
 registerWidget::~registerWidget()
 {
     delete ui;
+}
+
+void registerWidget::paintEvent(QPaintEvent *)
+{
+    //设置背景图片
+    QPainter p(this);
+    //p.drawPixmap(0,0,width(),height(),QPixmap(":/images/images/login_widget_bg.jpg"));
+    p.drawPixmap(0,0,width(),height(),QPixmap(":/images/images/login3.png"));
 }
 
 void registerWidget::on_pushButtonBack_clicked()
@@ -101,3 +143,20 @@ void registerWidget::dealRegMsg()
     ui->pushButtonReg->setDisabled(false);
 }
 
+void registerWidget::mousePressEvent(QMouseEvent *e)
+{
+    last=e->globalPos();
+}
+void registerWidget::mouseMoveEvent(QMouseEvent *e)
+{
+    int dx = e->globalX() - last.x();
+        int dy = e->globalY() - last.y();
+        last = e->globalPos();
+        move(x()+dx, y()+dy);
+}
+void registerWidget::mouseReleaseEvent(QMouseEvent *e)
+{
+    int dx = e->globalX() - last.x();
+    int dy = e->globalY() - last.y();
+    move(x()+dx, y()+dy);
+}
